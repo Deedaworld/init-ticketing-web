@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "run-p start-server start-redis",
     "start-server": "node index.js",
     "start-redis": "cd config && python3 redis_py.py"
