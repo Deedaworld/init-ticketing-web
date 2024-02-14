@@ -80,36 +80,11 @@ jobs:
         git commit -m "Update image tag"
         git push origin main
 
-    - name: Notify Slack on Success
-      if: success()
-      id: slack-success
-      uses: slackapi/slack-github-action@v1.24.0
-      with:
-        payload: |
-          {
-            "channel": "notification-cicd",
-            "attachments": [
-              {
-                "color": "#36a64f", # 성공시 연두색
-                "title": "${{ github.repository }}", # 제목은 깃헙 레포지토리
-                "title_link": "https://github.com/${{github.repository}}", # 제목 클릭시 레포지토리로 이동
-                "text": "GitHub Action 성공",
-                "fields": [
-                  {
-                    "title": "Repository",
-                    "value": "${{ github.repository }}",
-                    "short": true
-                  },
-                  {
-                    "title": "Tag",
-                    "value": "${{ github.ref_name }}",
-                    "short": true
-                  }
-                ]      
-              }
-            ]  
-          }
+    - name: Notify Slack
+      uses: rtCamp/action-slack-notify@v2.0.0
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOL_URL }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        SLACK_COLOR: '#00FF00'
+        SLACK_TITLE: 'Build and Deploy'
+        SLACK_TEXT: 'CI works done successfully. Move on to argoCD.'
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOL_URL }}
 
