@@ -80,11 +80,3 @@ jobs:
         git commit -m "Update image tag"
         git push origin main
 
-    - name: Notify Slack
-      uses: rtCamp/action-slack-notify@v2.0.0
-      env:
-        SLACK_COLOR: '#00FF00'
-        SLACK_TITLE: 'Build and Deploy'
-        SLACK_TEXT: 'CI works done successfully. Move on to argoCD.'
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOL_URL }}
-
