@@ -1,8 +1,5 @@
 {
   "scripts": {
-    "start": "run-p start-server start-redis",
-    "start-server": "node index.js",
-    "start-redis": "cd config && python3 redis_py.py",
     "test": "echo \"hello stranger\""
   },
   "type": "commonjs",
