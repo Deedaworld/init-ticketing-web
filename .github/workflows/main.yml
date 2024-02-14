@@ -32,7 +32,7 @@ jobs:
       id: set-var
       run: |
         echo "ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}" >> $GITHUB_ENV
-        echo "ECR_REPOSITORY=wy-app" >> $GITHUB_ENV
+        echo "ECR_REPOSITORY=wy-node" >> $GITHUB_ENV
         echo "IMAGE_TAG=${{ github.run_number }}" >> $GITHUB_ENV
         echo "GIT_EMAIL=jydianasuh@gmail.com" >> $GITHUB_ENV
         echo "GIT_NAME=deedaworld" >> $GITHUB_ENV
@@ -79,3 +79,11 @@ jobs:
         git add deployment.yml
         git commit -m "Update image tag"
         git push origin main
+
+    - name: Notify Slack
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_COLOR: '#00FF00'
+        SLACK_TITLE: 'Build and Deploy'
+        SLACK_TEXT: 'The build and deployment process has been completed successfully. Now, GO argoCD to check the further process.'
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
